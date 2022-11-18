@@ -1,32 +1,37 @@
-const reducer = (currentState, action) => {
-  if (currentState === undefined) {
-    return {
-      number: 1,
-    };
-  }
+const initialState = {
+  number: 1,
+};
 
-  const newState = { ...currentState };
+const reducer = (currentState = initialState, action) => {
+  // const newState = { ...currentState }; 생활코딩 방법 initialState 없이 진행
 
-  if (action.type === "PLUS") {
-    newState.number++;
-  }
-
-  if (action.type === "MINUS") {
-    newState.number--;
-  }
-
-  return newState;
-
-  // switch (action.type) { 내가 만드려고 했는데 안됨...ㅠ
-  //   case "PLUS":
-  //     return newState.number++;
-
-  //   case "MINUS":
-  //     return newState.number--;
-
-  //   default:
-  //     return (currentState = 1);
+  // if (action.type === "PLUS") {
+  //   newState.number++;
   // }
+
+  // if (action.type === "MINUS") {
+  //   newState.number--;
+  // }
+
+  // return newState;
+
+  // 벨로퍼트 방법
+  switch (action.type) {
+    case "PLUS":
+      return {
+        ...currentState,
+        number: currentState.number + 1,
+      };
+
+    case "MINUS":
+      return {
+        ...currentState,
+        number: currentState.number - 1,
+      };
+
+    default:
+      return currentState;
+  }
 };
 
 export default reducer;
